@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Example App</title>
+  <style>
+    h2,
+    button {
+      text-align: center;
+    }
+
+    button {
+      padding: 20px;
+      background: orange;
+      border: none;
+
+      display: block;
+      margin: 20px auto
+    }
+
+    button a {
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 20px;
+      color: black
+    }
+
+
+    table {
+      width: 100%;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid lightgrey;
+      border-collapse: collapse;
+    }
+
+    p {
+      margin: 10px 0px;
+    }
+
+    th,
+    td {
+      padding: 2px 4px;
+      text-align: center;
+    }
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+
+    .qrCode {
+      margin: 20px auto
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="https://res.cloudinary.com/duongtaph13276/image/upload/v1666426536/logo3_1_j48fbz.png" alt="">
+  <h2>{{header}}</h2>
+  <p>{{text}}</p>
+  {{#if orders.length}}
+
+  <h3>Thông tin đơn hàng</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Mã đơn</th>
+        <th>Phim</th>
+        <th>Thời gian chiếu</th>
+        <th>Phòng</th>
+        <th>Ghế</th>
+        <th>Đồ ăn</th>
+        <th>Giá</th>
+        <th>Mã QR</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#orders}}
+      <tr>
+        <td>{{shortId}}</td>
+        <td>{{movie}}</td>
+        <td>{{date}}</td>
+        <td>{{room}}</td>
+        <td>{{seats}}</td>
+        <td>{{foods}}</td>
+        <td>{{totalPrice}}</td>
+        <td><img src="cid:unique@nodemailer.com" with="50px" /></td>
+      </tr>
+      {{/orders}}
+    </tbody>
+  </table>
+
+  {{/if}}
+  {{#if url.length }}
+  <button><a href="{{url}}"> Xác nhận ngay </a></button>
+  {{/if}}
+</body>
+
+</html>

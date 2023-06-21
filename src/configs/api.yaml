@@ -1,0 +1,2351 @@
+openapi: 3.0.3
+info:
+  title: Swagger for ecommerce - OpenAPI 3.0
+  description: Mô tả API của SunCinema for frontend
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Github
+    url: https://github.com/duon97ran2/SunCinema
+  version: 1.0.11
+servers:
+  - url: http://localhost:5005/api/
+
+# Tags
+tags:
+  - name: categories
+    description: Tất cả api về danh mục
+  - name: movie
+    description: Tất cả api về phim
+  - name: movieType
+    description: Tất cả api về thể loại phim
+  - name: filmFormat
+    description: Tất cả api về định dạng phim
+  - name: post
+    description: Tất cả api về bài viết
+  - name: food
+    description: Tất cả api về đồ ăn
+  - name: foodDetail
+    description: Tất cả api về chi tiết đồ ăn
+  - name: room
+    description: Tất cả api về phòng
+  - name: seat
+    description: Tất cả api về ghế
+  - name: seatType
+    description: Tất cả api về kiểu ghế
+  - name: slider
+    description: Tất cả api về bìa quảng cáo
+  - name: ticket
+    description: Tất cả api về vé
+  - name: ticketDetail
+    description: Tất cả api về chi tiết vé
+  - name: ticketPrice
+    description: Tất cả api về giá vé
+  - name: voucher
+    description: Tất cả api về mã khuyến mãi
+  - name: webConfig
+    description: Tất cả api về thông tin website
+  - name: comment
+    description: Tất cả api về bình luận
+  - name: order
+    description: Tất cả api về đặt vé
+  - name: setByShowTime
+    description: Tất cả api về đặt theo thời gian hiển thị
+  - name: showTime
+    description: Tất cả api về đặt theo thời gian chiếu
+  - name: user
+    description: Tất cả api về người dùng
+
+# Paths
+paths:
+  /categories:
+    get:
+      tags:
+        - categories
+      summary: Lấy ra tất cả danh mục
+      responses:
+        "200":
+          description: Lấy danh mục thành công!
+        "400":
+          description: Không lấy được danh mục!
+    post:
+      tags:
+        - categories
+      summary: Thêm danh mục
+      description: Thêm danh mục
+      operationId: addCategory
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+        required: true
+      responses:
+        "200":
+          description: Thêm danh mục thành công!
+        "400":
+          description: Không thêm được danh mục!
+  /categories/{categoryId}:
+    get:
+      tags:
+        - categories
+      summary: Lấy ra một danh mục
+      parameters:
+        - name: categoryId
+          in: path
+          description: ID một danh mục
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một danh mục thành công!
+        "400":
+          description: Không lấy được danh mục!
+    put:
+      tags:
+        - categories
+      summary: Cập nhật một danh mục
+      description: Cập nhật một danh mục
+      parameters:
+        - name: categoryId
+          in: path
+          description: Chọn danh mục cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "200":
+          description: Cập nhật danh mục thành công!
+        "400":
+          description: Không cập nhật được danh mục!
+    delete:
+      tags:
+        - categories
+      summary: Xóa một danh mục
+      description: Xóa một danh mục
+      parameters:
+        - name: categoryId
+          in: path
+          description: Chọn danh mục cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa danh mục thành công!
+        "400":
+          description: Không xóa được danh mục!
+  /categories/get-slug/{categorySlug}:
+    get:
+      tags:
+        - categories
+      summary: Lấy ra một danh mục
+      parameters:
+        - name: categorySlug
+          in: path
+          description: Slug một danh mục
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một danh mục thành công!
+        "400":
+          description: Không lấy được danh mục!
+  /postByCategory/{categoryId}:
+    get:
+      tags:
+        - categories
+      summary: Lấy ra bài viết theo danh mục
+      parameters:
+        - name: categorySlug
+          in: path
+          description: ID một danh mục
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một bài viết theo danh mục thành công!
+        "400":
+          description: Không lấy được bài viết theo danh mục!
+  /movie:
+    get:
+      tags:
+        - movie
+      summary: Lấy ra tất cả phim
+      responses:
+        "200":
+          description: Lấy phim thành công!
+        "400":
+          description: Không lấy được phim!
+    post:
+      tags:
+        - movie
+      summary: Thêm phim
+      description: Thêm phim
+      operationId: addCategory
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Movie"
+        required: true
+      responses:
+        "200":
+          description: Thêm phim thành công!
+        "400":
+          description: Không thêm được phim!
+  /movie/{movieId}:
+    get:
+      tags:
+        - movie
+      summary: Lấy ra một phim
+      parameters:
+        - name: movieId
+          in: path
+          description: ID một phim
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một phim thành công!
+        "400":
+          description: Không lấy được phim!
+    patch:
+      tags:
+        - movie
+      summary: Cập nhật một phim
+      description: Cập nhật một phim
+      parameters:
+        - name: movieId
+          in: path
+          description: Chọn phim cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Movie"
+      responses:
+        "200":
+          description: Cập nhật phim thành công!
+        "400":
+          description: Không cập nhật được phim!
+    delete:
+      tags:
+        - movie
+      summary: Xóa một phim
+      description: Xóa một phim
+      parameters:
+        - name: movieId
+          in: path
+          description: Chọn phim cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa phim thành công!
+        "400":
+          description: Không xóa được phim!
+  /movies/{movieSlug}:
+    get:
+      tags:
+        - movie
+      summary: Lấy ra một phim theo slug
+      parameters:
+        - name: movieSlug
+          in: path
+          description: Slug một phim
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một phim thành công!
+        "400":
+          description: Không lấy được phim!
+  /movies:
+    get:
+      tags:
+        - movie
+      summary: Lấy ra danh sách phim theo trang
+      parameters:
+        - {
+            in: query,
+            name: page,
+            schema: { type: integer },
+            description: Trang cần lấy,
+          }
+      responses:
+        "200":
+          description: Lấy danh sách phim theo trang thành công!
+        "400":
+          description: Không lấy được danh sách phim theo trang!
+  /searchByMovieName:
+    get:
+      tags:
+        - movie
+      summary: Tìm kiếm phim
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Tìm kiếm thành công!
+        "400":
+          description: Tìm kiếm thất bại!
+  /movieType:
+    get:
+      tags:
+        - movieType
+      summary: Lấy ra tất cả thể loại phim
+      responses:
+        "200":
+          description: Lấy thể loại phim thành công!
+        "400":
+          description: Không lấy được thể loại phim!
+    post:
+      tags:
+        - movieType
+      summary: Thêm thể loại phim
+      description: Thêm thể loại phim
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovieType"
+        required: true
+      responses:
+        "200":
+          description: Thêm thể loại phim thành công!
+        "400":
+          description: Không thêm được thể loại phim!
+  /movieType/{movieTypeId}:
+    get:
+      tags:
+        - movieType
+      summary: Lấy ra một thể loại phim
+      parameters:
+        - name: movieTypeId
+          in: path
+          description: ID một thể loại phim
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một thể loại phim thành công!
+        "400":
+          description: Không lấy được thể loại phim!
+    patch:
+      tags:
+        - movieType
+      summary: Cập nhật một thể loại phim
+      description: Cập nhật một thể loại phim
+      parameters:
+        - name: movieTypeId
+          in: path
+          description: Chọn thể loại phim cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovieType"
+      responses:
+        "200":
+          description: Cập nhật thể loại phim thành công!
+        "400":
+          description: Không cập nhật được thể loại phim!
+    delete:
+      tags:
+        - movieType
+      summary: Xóa một thể loại phim
+      description: Xóa một thể loại phim
+      parameters:
+        - name: movieTypeId
+          in: path
+          description: Chọn thể loại phim cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa thể loại phim thành công!
+        "400":
+          description: Không xóa được thể loại phim!
+  /movieTypes/{movieTypeId}:
+    get:
+      tags:
+        - movieType
+      summary: Lấy ra danh sách phim theo thể loại phim
+      parameters:
+        - name: movieTypeId
+          in: path
+          description: ID một thể loại phim
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một thể loại phim thành công!
+        "400":
+          description: Không lấy được thể loại phim!
+  /post:
+    get:
+      tags:
+        - post
+      summary: Lấy ra tất cả bài viết
+      responses:
+        "200":
+          description: "Lấy bài viết thành công!"
+        "400":
+          description: "Không lấy được bài viết"
+    post:
+      tags:
+        - post
+      summary: Thêm bài viết
+      description: Thêm bài viết
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Post"
+        required: true
+      responses:
+        "200":
+          description: Thêm bài viết thành công!
+        "400":
+          description: Không thêm được bài viết!
+  /post/{postId}:
+    get:
+      tags:
+        - post
+      summary: Lấy ra một bài viết
+      parameters:
+        - name: postId
+          in: path
+          description: ID một bài viết
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một bài viết thành công!
+        "400":
+          description: Không lấy được bài viết!
+    patch:
+      tags:
+        - post
+      summary: Cập nhật một bài viết
+      description: Cập nhật một bài viết
+      parameters:
+        - name: postId
+          in: path
+          description: Chọn bài viết cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Post"
+      responses:
+        "200":
+          description: Cập nhật bài viết thành công!
+        "400":
+          description: Không cập nhật được bài viết!
+    delete:
+      tags:
+        - post
+      summary: Xóa một bài viết
+      description: Xóa một bài viết
+      parameters:
+        - name: postId
+          in: path
+          description: Chọn bài viết cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa bài viết thành công!
+        "400":
+          description: Không xóa được bài viết!
+  /posts/{postSlug}:
+    get:
+      tags:
+        - post
+      summary: Lấy ra một bài viết
+      parameters:
+        - name: postSlug
+          in: path
+          description: Slug một bài viết
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một bài viết thành công!
+        "400":
+          description: Không lấy được bài viết!
+  /food:
+    get:
+      tags:
+        - food
+      summary: Lấy ra tất cả đồ ăn
+      responses:
+        "200":
+          description: Lấy đồ ăn thành công!
+        "400":
+          description: Không lấy được đồ ăn!
+    post:
+      tags:
+        - food
+      summary: Thêm đồ ăn
+      description: Thêm đồ ăn
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Food"
+        required: true
+      responses:
+        "200":
+          description: Thêm đồ ăn thành công!
+        "400":
+          description: Không thêm được đồ ăn!
+  /food/{foodId}:
+    get:
+      tags:
+        - food
+      summary: Lấy ra một đồ ăn
+      parameters:
+        - name: foodId
+          in: path
+          description: ID một đồ ăn
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một đồ ăn thành công!
+        "400":
+          description: Không lấy được đồ ăn!
+    patch:
+      tags:
+        - food
+      summary: Cập nhật một đồ ăn
+      description: Cập nhật một đồ ăn
+      parameters:
+        - name: foodId
+          in: path
+          description: Chọn đồ ăn cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Food"
+      responses:
+        "200":
+          description: Cập nhật đồ ăn thành công!
+        "400":
+          description: Không cập nhật được đồ ăn!
+    delete:
+      tags:
+        - food
+      summary: Xóa một đồ ăn
+      description: Xóa một đồ ăn
+      parameters:
+        - name: foodId
+          in: path
+          description: Chọn đồ ăn cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa đồ ăn thành công!
+        "400":
+          description: Không xóa được đồ ăn!
+  /foodDetailByFood/{foodId}:
+    get:
+      tags:
+        - food
+      summary: Lấy ra danh sách chi tiết đồ ăn theo đồ ăn
+      parameters:
+        - name: foodId
+          in: path
+          description: ID một đồ ăn
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một đồ ăn thành công!
+        "400":
+          description: Không lấy được đồ ăn!
+  /foodDetail:
+    get:
+      tags:
+        - foodDetail
+      summary: Lấy ra chi tiết tất cả đồ ăn
+      responses:
+        "200":
+          description: Lấy chi tiết đồ ăn thành công!
+        "400":
+          description: Không lấy được chi tiết đồ ăn!
+    post:
+      tags:
+        - foodDetail
+      summary: Thêm chi tiết đồ ăn
+      description: Thêm chi tiết đồ ăn
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodDetail"
+        required: true
+      responses:
+        "200":
+          description: Thêm chi tiết đồ ăn thành công!
+        "400":
+          description: Không thêm được chi tiết đồ ăn!
+  /foodDetail/{foodDetailId}:
+    get:
+      tags:
+        - foodDetail
+      summary: Lấy ra một chi tiết đồ ăn
+      parameters:
+        - name: foodDetailId
+          in: path
+          description: ID một chi tiết đồ ăn
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một chi tiết đồ ăn thành công!
+        "400":
+          description: Không lấy được chi tiết đồ ăn!
+    patch:
+      tags:
+        - foodDetail
+      summary: Cập nhật một chi tiết đồ ăn
+      description: Cập nhật một chi tiết đồ ăn
+      parameters:
+        - name: foodDetailId
+          in: path
+          description: Chọn chi tiết đồ ăn cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodDetail"
+      responses:
+        "200":
+          description: Cập nhật chi tiết đồ ăn thành công!
+        "404":
+          description: Không cập nhật được chi tiết đồ ăn!
+    delete:
+      tags:
+        - foodDetail
+      summary: Xóa một chi tiết đồ ăn
+      description: Xóa một chi tiết đồ ăn
+      parameters:
+        - name: foodDetailId
+          in: path
+          description: Chọn chi tiết đồ ăn cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa chi tiết đồ ăn thành công!
+        "400":
+          description: Không xóa được chi tiết đồ ăn!
+  /rooms:
+    get:
+      tags:
+        - room
+      summary: Lấy ra tất cả phòng
+      responses:
+        "200":
+          description: Lấy phòng thành công!
+        "400":
+          description: Không lấy được phòng!
+    post:
+      tags:
+        - room
+      summary: Thêm phòng
+      description: Thêm phòng
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Room"
+        required: true
+      responses:
+        "200":
+          description: Thêm phòng thành công!
+        "400":
+          description: Không thêm được phòng!
+  /rooms/{roomId}:
+    get:
+      tags:
+        - room
+      summary: Lấy ra một phòng
+      parameters:
+        - name: roomId
+          in: path
+          description: ID một phòng
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một phòng thành công!
+        "400":
+          description: Không lấy được phòng!
+    put:
+      tags:
+        - room
+      summary: Cập nhật một phòng
+      description: Cập nhật một phòng
+      parameters:
+        - name: roomId
+          in: path
+          description: Chọn phòng cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Room"
+      responses:
+        "200":
+          description: Cập nhật phòng thành công!
+        "404":
+          description: Không cập nhật được phòng!
+    delete:
+      tags:
+        - room
+      summary: Xóa một phòng
+      description: Xóa một phòng
+      parameters:
+        - name: roomId
+          in: path
+          description: Chọn phòng cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa phòng thành công!
+        "400":
+          description: Không xóa được phòng!
+  /seats:
+    get:
+      tags:
+        - seat
+      summary: Lấy ra tất cả ghế
+      responses:
+        "200":
+          description: Lấy ghế thành công!
+        "400":
+          description: Không lấy được ghế!
+    post:
+      tags:
+        - seat
+      summary: Thêm ghế
+      description: Thêm ghế
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Seat"
+        required: true
+      responses:
+        "200":
+          description: Thêm ghế thành công!
+        "400":
+          description: Không thêm được ghế!
+  /seats/{seatId}:
+    get:
+      tags:
+        - seat
+      summary: Lấy ra một ghế
+      parameters:
+        - name: seatId
+          in: path
+          description: ID một ghế
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một ghế thành công!
+        "400":
+          description: Không lấy được ghế!
+    put:
+      tags:
+        - seat
+      summary: Cập nhật một ghế
+      description: Cập nhật một ghế
+      parameters:
+        - name: seatId
+          in: path
+          description: Chọn ghế cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Seat"
+      responses:
+        "200":
+          description: Cập nhật ghế thành công!
+        "404":
+          description: Không cập nhật được ghế!
+    delete:
+      tags:
+        - seat
+      summary: Xóa một ghế
+      description: Xóa một ghế
+      parameters:
+        - name: seatId
+          in: path
+          description: Chọn ghế cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa ghế thành công!
+        "400":
+          description: Không xóa được ghế!
+  /seatType:
+    get:
+      tags:
+        - seatType
+      summary: Lấy ra tất cả kiểu ghế
+      responses:
+        "200":
+          description: Lấy kiểu ghế thành công!
+        "400":
+          description: Không lấy được kiểu ghế!
+    post:
+      tags:
+        - seatType
+      summary: Thêm kiểu ghế
+      description: Thêm kiểu ghế
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SeatType"
+        required: true
+      responses:
+        "200":
+          description: Thêm kiểu ghế thành công!
+        "400":
+          description: Không thêm được kiểu ghế!
+  /seatType/{seatTypeId}:
+    get:
+      tags:
+        - seatType
+      summary: Lấy ra một kiểu ghế
+      parameters:
+        - name: seatTypeId
+          in: path
+          description: ID một kiểu ghế
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một kiểu ghế thành công!
+        "400":
+          description: Không lấy được kiểu ghế!
+    patch:
+      tags:
+        - seatType
+      summary: Cập nhật một kiểu ghế
+      description: Cập nhật một kiểu ghế
+      parameters:
+        - name: seatTypeId
+          in: path
+          description: Chọn kiểu ghế cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SeatType"
+      responses:
+        "200":
+          description: Cập nhật kiểu ghế thành công!
+        "404":
+          description: Không cập nhật được kiểu ghế!
+    delete:
+      tags:
+        - seatType
+      summary: Xóa một kiểu ghế
+      description: Xóa một kiểu ghế
+      parameters:
+        - name: seatTypeId
+          in: path
+          description: Chọn kiểu ghế cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa kiểu ghế thành công!
+        "400":
+          description: Không xóa được kiểu ghế!
+  /seatBySeatType/{seatTypeId}:
+    get:
+      tags:
+        - seatType
+      summary: Lấy ra danh sách ghế theo kiểu ghế
+      parameters:
+        - name: seatTypeId
+          in: path
+          description: ID một kiểu ghế
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy danh sách ghế theo kiểu ghế thành công!
+        "400":
+          description: Không lấy được danh sách ghế theo kiểu ghế!
+  /slider:
+    get:
+      tags:
+        - slider
+      summary: Lấy ra tất cả bìa quảng cáo
+      responses:
+        "200":
+          description: Lấy bìa quảng cáo thành công!
+        "400":
+          description: Không lấy được bìa quảng cáo!
+    post:
+      tags:
+        - slider
+      summary: Thêm bìa quảng cáo
+      description: Thêm bìa quảng cáo
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Slider"
+        required: true
+      responses:
+        "200":
+          description: Thêm bìa quảng cáo thành công!
+        "400":
+          description: Không thêm được bìa quảng cáo!
+  /slider/{sliderId}:
+    get:
+      tags:
+        - slider
+      summary: Lấy ra một bìa quảng cáo
+      parameters:
+        - name: sliderId
+          in: path
+          description: ID một bìa quảng cáo
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một bìa quảng cáo thành công!
+        "400":
+          description: Không lấy được bìa quảng cáo!
+    patch:
+      tags:
+        - slider
+      summary: Cập nhật một bìa quảng cáo
+      description: Cập nhật một bìa quảng cáo
+      parameters:
+        - name: sliderId
+          in: path
+          description: Chọn bìa quảng cáo cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Slider"
+      responses:
+        "200":
+          description: Cập nhật bìa quảng cáo thành công!
+        "404":
+          description: Không cập nhật được bìa quảng cáo!
+    delete:
+      tags:
+        - slider
+      summary: Xóa một bìa quảng cáo
+      description: Xóa một bìa quảng cáo
+      parameters:
+        - name: sliderId
+          in: path
+          description: Chọn bìa quảng cáo cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa bìa quảng cáo thành công!
+        "400":
+          description: Không xóa được bìa quảng cáo!
+  /sliders/{sliderSlug}:
+    get:
+      tags:
+        - slider
+      summary: Lấy ra một bìa quảng cáo bằng slug
+      parameters:
+        - name: sliderSlug
+          in: path
+          description: Slug một bìa quảng cáo
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một bìa quảng cáo thành công!
+        "400":
+          description: Không lấy được bìa quảng cáo!
+  /tickets:
+    get:
+      tags:
+        - ticket
+      summary: Lấy ra tất cả vé
+      responses:
+        "200":
+          description: Lấy vé thành công!
+        "400":
+          description: Không lấy được vé!
+    post:
+      tags:
+        - ticket
+      summary: Thêm vé
+      description: Thêm vé
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+        required: true
+      responses:
+        "200":
+          description: Thêm vé thành công!
+        "400":
+          description: Không thêm được vé!
+  /tickets/{ticketId}:
+    get:
+      tags:
+        - ticket
+      summary: Lấy ra một vé
+      parameters:
+        - name: ticketId
+          in: path
+          description: ID một vé
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một vé thành công!
+        "400":
+          description: Không lấy được vé!
+    put:
+      tags:
+        - ticket
+      summary: Cập nhật một vé
+      description: Cập nhật một vé
+      parameters:
+        - name: ticketId
+          in: path
+          description: Chọn vé cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "200":
+          description: Cập nhật vé thành công!
+        "404":
+          description: Không cập nhật được vé!
+    delete:
+      tags:
+        - ticket
+      summary: Xóa một vé
+      description: Xóa một vé
+      parameters:
+        - name: ticketId
+          in: path
+          description: Chọn vé cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa vé thành công!
+        "400":
+          description: Không xóa được vé!
+  /ticketDetailByTicket/{ticketId}:
+    get:
+      tags:
+        - ticket
+      summary: Lấy ra danh sách chi tiết vé theo vé
+      parameters:
+        - name: ticketId
+          in: path
+          description: ID một vé
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy danh sách chi tiết vé theo vé thành công!
+        "400":
+          description: Không lấy được danh sách chi tiết vé theo vé!
+  /ticketDetail:
+    get:
+      tags:
+        - ticketDetail
+      summary: Lấy ra tất cả chi tiết vé
+      responses:
+        "200":
+          description: Lấy chi tiết vé thành công!
+        "400":
+          description: Không lấy được chi tiết vé!
+    post:
+      tags:
+        - ticketDetail
+      summary: Thêm chi tiết vé
+      description: Thêm chi tiết vé
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketDetail"
+        required: true
+      responses:
+        "200":
+          description: Thêm chi tiết vé thành công!
+        "400":
+          description: Không thêm được chi tiết vé!
+  /ticketDetail/{ticketDetailId}:
+    get:
+      tags:
+        - ticketDetail
+      summary: Lấy ra một chi tiết vé
+      parameters:
+        - name: ticketDetailId
+          in: path
+          description: ID một chi tiết vé
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một chi tiết vé thành công!
+        "400":
+          description: Không lấy được chi tiết vé!
+    put:
+      tags:
+        - ticket
+      summary: Cập nhật một chi tiết vé
+      description: Cập nhật một chi tiết vé
+      parameters:
+        - name: ticketDetailId
+          in: path
+          description: Chọn chi tiết vé cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketDetail"
+      responses:
+        "200":
+          description: Cập nhật chi tiết vé thành công!
+        "404":
+          description: Không cập nhật được chi tiết vé!
+    delete:
+      tags:
+        - ticketDetail
+      summary: Xóa một chi tiết vé
+      description: Xóa một chi tiết vé
+      parameters:
+        - name: ticketDetailId
+          in: path
+          description: Chọn chi tiết vé cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa chi tiết vé thành công!
+        "400":
+          description: Không xóa được chi tiết vé!
+  /ticketPrice:
+    get:
+      tags:
+        - ticketPrice
+      summary: Lấy ra tất cả giá vé
+      responses:
+        "200":
+          description: Lấy giá vé thành công!
+        "400":
+          description: Không lấy được giá vé!
+    post:
+      tags:
+        - ticketPrice
+      summary: Thêm giá vé
+      description: Thêm giá vé
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketPrice"
+        required: true
+      responses:
+        "200":
+          description: Thêm giá vé thành công!
+        "400":
+          description: Không thêm được giá vé!
+  /ticketPrice/{ticketPriceId}:
+    get:
+      tags:
+        - ticketPrice
+      summary: Lấy ra một giá vé
+      parameters:
+        - name: ticketPriceId
+          in: path
+          description: ID một giá vé
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một giá vé thành công!
+        "400":
+          description: Không lấy được giá vé!
+    put:
+      tags:
+        - ticketPrice
+      summary: Cập nhật một giá vé
+      description: Cập nhật một giá vé
+      parameters:
+        - name: ticketPriceId
+          in: path
+          description: Chọn giá vé cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketPrice"
+      responses:
+        "200":
+          description: Cập nhật giá vé thành công!
+        "404":
+          description: Không cập nhật được giá vé!
+    delete:
+      tags:
+        - ticketPrice
+      summary: Xóa một giá vé
+      description: Xóa một giá vé
+      parameters:
+        - name: ticketPriceId
+          in: path
+          description: Chọn giá vé cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa giá vé thành công!
+        "400":
+          description: Không xóa được giá vé!
+  /voucher:
+    get:
+      tags:
+        - voucher
+      summary: Lấy ra tất cả mã khuyến mãi
+      responses:
+        "200":
+          description: Lấy mã khuyến mãi thành công!
+        "400":
+          description: Không lấy được mã khuyến mãi!
+    post:
+      tags:
+        - voucher
+      summary: Thêm mã khuyến mãi
+      description: Thêm mã khuyến mãi
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Voucher"
+        required: true
+      responses:
+        "200":
+          description: Thêm mã khuyến mãi thành công!
+        "400":
+          description: Không thêm được mã khuyến mãi!
+  /voucher/{voucherId}:
+    get:
+      tags:
+        - voucher
+      summary: Lấy ra một mã khuyến mãi
+      parameters:
+        - name: voucherId
+          in: path
+          description: ID một mã khuyến mãi
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một mã khuyến mãi thành công!
+        "400":
+          description: Không lấy được mã khuyến mãi!
+    patch:
+      tags:
+        - voucher
+      summary: Cập nhật một mã khuyến mãi
+      description: Cập nhật một mã khuyến mãi
+      parameters:
+        - name: voucherId
+          in: path
+          description: Chọn mã khuyến mãi cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Voucher"
+      responses:
+        "200":
+          description: Cập nhật mã khuyến mãi thành công!
+        "404":
+          description: Không cập nhật được mã khuyến mãi!
+    delete:
+      tags:
+        - voucher
+      summary: Xóa một mã khuyến mãi
+      description: Xóa một mã khuyến mãi
+      parameters:
+        - name: voucherId
+          in: path
+          description: Chọn mã khuyến mãi cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa mã khuyến mãi thành công!
+        "400":
+          description: Không xóa được mã khuyến mãi!
+  /config:
+    get:
+      tags:
+        - webConfig
+      summary: Lấy ra tất cả thông tin website
+      responses:
+        "200":
+          description: Lấy thông tin website thành công!
+        "400":
+          description: Không lấy được thông tin website!
+    post:
+      tags:
+        - webConfig
+      summary: Thêm thông tin website
+      description: Thêm thông tin website
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebConfig"
+        required: true
+      responses:
+        "200":
+          description: Thêm thông tin website thành công!
+        "400":
+          description: Không thêm được thông tin website!
+  /config/{configId}:
+    get:
+      tags:
+        - webConfig
+      summary: Lấy ra một thông tin website
+      parameters:
+        - name: configId
+          in: path
+          description: ID một thông tin website
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một thông tin website thành công!
+        "400":
+          description: Không lấy được thông tin website!
+    put:
+      tags:
+        - webConfig
+      summary: Cập nhật một thông tin website
+      description: Cập nhật một thông tin website
+      parameters:
+        - name: configId
+          in: path
+          description: Chọn thông tin website cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebConfig"
+      responses:
+        "200":
+          description: Cập nhật thông tin website thành công!
+        "404":
+          description: Không cập nhật được thông tin website!
+    delete:
+      tags:
+        - webConfig
+      summary: Xóa một thông tin website
+      description: Xóa một thông tin website
+      parameters:
+        - name: configId
+          in: path
+          description: Chọn thông tin website cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa thông tin website thành công!
+        "400":
+          description: Không xóa được thông tin website!
+  /comment:
+    get:
+      tags:
+        - comment
+      summary: Lấy ra tất cả bình luận
+      responses:
+        "200":
+          description: Lấy bình luận thành công!
+        "400":
+          description: Không lấy được bình luận!
+    post:
+      tags:
+        - comment
+      summary: Thêm bình luận
+      description: Thêm bình luận
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Comment"
+        required: true
+      responses:
+        "200":
+          description: Thêm bình luận thành công!
+        "400":
+          description: Không thêm được bình luận!
+  /comments:
+    get:
+      tags:
+        - comment
+      summary: Bình luận theo phim và người dùng
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Lấy bình luận thành công!
+        "400":
+          description: Không lấy được bình luận!
+  /comment/{commentId}:
+    get:
+      tags:
+        - comment
+      summary: Lấy ra một bình luận
+      parameters:
+        - name: commentId
+          in: path
+          description: ID một bình luận
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một bình luận thành công!
+        "400":
+          description: Không lấy được bình luận!
+    delete:
+      tags:
+        - comment
+      summary: Xóa một bình luận
+      description: Xóa một bình luận
+      parameters:
+        - name: commentId
+          in: path
+          description: Chọn bình luận cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa bình luận thành công!
+        "400":
+          description: Không xóa được bình luận!
+  /filmFormat:
+    get:
+      tags:
+        - filmFormat
+      summary: Lấy ra tất cả định dạng phim
+      responses:
+        "200":
+          description: Lấy định dạng phim thành công!
+        "400":
+          description: Không lấy được định dạng phim!
+    post:
+      tags:
+        - filmFormat
+      summary: Thêm định dạng phim
+      description: Thêm định dạng phim
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilmFormat"
+        required: true
+      responses:
+        "200":
+          description: Thêm định dạng phim thành công!
+        "400":
+          description: Không thêm được định dạng phim!
+  /filmFormat/{filmFormatId}:
+    get:
+      tags:
+        - filmFormat
+      summary: Lấy ra một định dạng phim
+      parameters:
+        - name: filmFormatId
+          in: path
+          description: ID một định dạng phim
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một định dạng phim thành công!
+        "400":
+          description: Không lấy được định dạng phim!
+    patch:
+      tags:
+        - filmFormat
+      summary: Cập nhật một định dạng phim
+      description: Cập nhật một định dạng phim
+      parameters:
+        - name: filmFormatId
+          in: path
+          description: Chọn định dạng phim cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilmFormat"
+      responses:
+        "200":
+          description: Cập nhật định dạng phim thành công!
+        "404":
+          description: Không cập nhật được định dạng phim!
+    delete:
+      tags:
+        - filmFormat
+      summary: Xóa một định dạng phim
+      description: Xóa một định dạng phim
+      parameters:
+        - name: filmFormatId
+          in: path
+          description: Chọn định dạng phim cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa định dạng phim thành công!
+        "400":
+          description: Không xóa được định dạng phim!
+  /order:
+    get:
+      tags:
+        - order
+      summary: Lấy ra tất cả đặt vé
+      responses:
+        "200":
+          description: Lấy đặt vé thành công!
+        "400":
+          description: Không lấy được đặt vé!
+    post:
+      tags:
+        - order
+      summary: Thêm đặt vé
+      description: Thêm đặt vé
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+        required: true
+      responses:
+        "200":
+          description: Thêm đặt vé thành công!
+        "400":
+          description: Không thêm được đặt vé!
+  /orders:
+    get:
+      tags:
+        - order
+      summary: Lấy ra tất cả đặt vé và xuất ra excel
+      responses:
+        "200":
+          description: Lấy đặt vé thành công!
+        "400":
+          description: Không lấy được đặt vé!
+  /order/{orderId}:
+    get:
+      tags:
+        - order
+      summary: Lấy ra một đặt vé
+      parameters:
+        - name: orderId
+          in: path
+          description: ID một đặt vé
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một đặt vé thành công!
+        "400":
+          description: Không lấy được đặt vé!
+    put:
+      tags:
+        - order
+      summary: Cập nhật một đặt vé
+      description: Cập nhật một đặt vé
+      parameters:
+        - name: orderId
+          in: path
+          description: Chọn đặt vé cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+      responses:
+        "200":
+          description: Cập nhật đặt vé thành công!
+        "404":
+          description: Không cập nhật được đặt vé!
+    delete:
+      tags:
+        - order
+      summary: Xóa một đặt vé
+      description: Xóa một đặt vé
+      parameters:
+        - name: orderId
+          in: path
+          description: Chọn đặt vé cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa đặt vé thành công!
+        "400":
+          description: Không xóa được đặt vé!
+  /setByShowTime:
+    get:
+      tags:
+        - setByShowTime
+      summary: Lấy ra tất cả đặt theo thời gian hiển thị
+      responses:
+        "200":
+          description: Lấy đặt theo thời gian hiển thị thành công!
+        "400":
+          description: Không lấy được đặt theo thời gian hiển thị!
+    post:
+      tags:
+        - setByShowTime
+      summary: Thêm đặt theo thời gian hiển thị
+      description: Thêm đặt theo thời gian hiển thị
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetByShowTime"
+        required: true
+      responses:
+        "200":
+          description: Thêm đặt theo thời gian hiển thị thành công!
+        "400":
+          description: Không thêm được đặt theo thời gian hiển thị!
+  /setByShowTime/{setByShowTimeId}:
+    get:
+      tags:
+        - setByShowTime
+      summary: Lấy ra một theo thời gian hiển thị
+      parameters:
+        - name: setByShowTimeId
+          in: path
+          description: ID một theo thời gian hiển thị
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một theo thời gian hiển thị thành công!
+        "400":
+          description: Không lấy được theo thời gian hiển thị!
+    put:
+      tags:
+        - setByShowTime
+      summary: Cập nhật một theo thời gian hiển thị
+      description: Cập nhật một theo thời gian hiển thị
+      parameters:
+        - name: setByShowTimeId
+          in: path
+          description: Chọn theo thời gian hiển thị cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetByShowTime"
+      responses:
+        "200":
+          description: Cập nhật theo thời gian hiển thị thành công!
+        "404":
+          description: Không cập nhật được theo thời gian hiển thị!
+    delete:
+      tags:
+        - setByShowTime
+      summary: Xóa một theo thời gian hiển thị
+      description: Xóa một theo thời gian hiển thị
+      parameters:
+        - name: setByShowTimeId
+          in: path
+          description: Chọn theo thời gian hiển thị cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa theo thời gian hiển thị thành công!
+        "400":
+          description: Không xóa được theo thời gian hiển thị!
+  /showTime:
+    get:
+      tags:
+        - showTime
+      summary: Lấy ra tất cả theo thời gian chiếu
+      responses:
+        "200":
+          description: Lấy theo thời gian chiếu thành công!
+        "400":
+          description: Không lấy được theo thời gian chiếu!
+    post:
+      tags:
+        - showTime
+      summary: Thêm theo thời gian chiếu
+      description: Thêm theo thời gian chiếu
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShowTime"
+        required: true
+      responses:
+        "200":
+          description: Thêm theo thời gian chiếu thành công!
+        "400":
+          description: Không thêm được theo thời gian chiếu!
+  /showTime/{showTimeId}:
+    get:
+      tags:
+        - showTime
+      summary: Lấy ra một thời gian chiếu
+      parameters:
+        - name: showTimeId
+          in: path
+          description: ID một thời gian chiếu
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một thời gian chiếu thành công!
+        "400":
+          description: Không lấy được thời gian chiếu!
+    put:
+      tags:
+        - showTime
+      summary: Cập nhật một thời gian chiếu
+      description: Cập nhật một thời gian chiếu
+      parameters:
+        - name: showTimeId
+          in: path
+          description: Chọn thời gian chiếu cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShowTime"
+      responses:
+        "200":
+          description: Cập nhật thời gian chiếu thành công!
+        "404":
+          description: Không cập nhật được thời gian chiếu!
+    delete:
+      tags:
+        - showTime
+      summary: Xóa một thời gian chiếu
+      description: Xóa một thời gian chiếu
+      parameters:
+        - name: showTimeId
+          in: path
+          description: Chọn thời gian chiếu cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa thời gian chiếu thành công!
+        "400":
+          description: Không xóa được thời gian chiếu!
+  /register:
+    post:
+      tags:
+        - user
+      summary: Đăng kí
+      description: Dành cho user đăng kí
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Đăng kí thành công!
+        "400":
+          description: Đăng kí thất bại!
+  /login:
+    post:
+      tags:
+        - user
+      summary: Đăng nhập
+      description: "Dành cho user đăng nhập"
+      parameters:
+        - name: email
+          in: query
+          description: Nhập email của bạn
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Nhập password của bạn
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Đăng nhập thành công!
+        "400":
+          description: Đăng nhập thất bại!
+  /users:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Lấy ra tất cả người dùng
+      responses:
+        "200":
+          description: Lấy người dùng thành công!
+        "400":
+          description: Không lấy được người dùng!
+  /users/{userId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Lấy ra một người dùng
+      parameters:
+        - name: userId
+          in: path
+          description: ID một người dùng
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lấy một người dùng thành công!
+        "400":
+          description: Không lấy được người dùng!
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Cập nhật một người dùng
+      description: Cập nhật một người dùng
+      parameters:
+        - name: userId
+          in: path
+          description: Chọn người dùng cần cập nhật
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Cập nhật người dùng thành công!
+        "404":
+          description: Không cập nhật được người dùng!
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Xóa một người dùng
+      description: Xóa một người dùng
+      parameters:
+        - name: userId
+          in: path
+          description: Chọn người dùng cần xóa
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Xóa người dùng thành công!
+        "400":
+          description: Không xóa được người dùng!
+  /userVerify:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Cập nhật người dùng
+      description: Cập nhật người dùng
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Cập nhật người dùng thành công!
+        "404":
+          description: Không cập nhật được người dùng!
+  /users/passwordUpdate/{userId}:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Cập nhật mật khẩu cho người dùng
+      description: Cập nhật mật khẩu cho người dùng
+      parameters:
+        - name: userId
+          in: path
+          description: Chọn người dùng cần cập nhật mật khẩu
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Bắt buộc phải có các trường giống bên dưới
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Cập nhật người dùng thành công!
+        "404":
+          description: Không cập nhật được người dùng!
+
+# Models
+components:
+  schemas:
+    Category:
+      properties:
+        title:
+          type: string
+    Movie:
+      properties:
+        name:
+          type: string
+        runTime:
+          type: string
+        ageLimit:
+          type: number
+        releaseDate:
+          type: date
+        languages:
+          type: string
+        country:
+          type: string
+        actor:
+          type: string
+        director:
+          type: string
+        description:
+          type: string
+        movieTypeId:
+          type: string
+        trailerUrl:
+          type: string
+        image:
+          type: arrays
+    MovieType:
+      properties:
+        movieName:
+          type: string
+    Post:
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        userId:
+          type: string
+        categoryId:
+          type: string
+        desc:
+          type: string
+        imagesFile:
+          type: arrays
+    Food:
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        stock:
+          type: string
+        size:
+          type: number
+    FoodDetail:
+      properties:
+        total:
+          type: number
+        foodId:
+          type: string
+    Room:
+      properties:
+        name:
+          type: string
+        rows:
+          type: number
+        columns:
+          type: number
+        seats:
+          type: object
+        screen:
+          type: string
+        seatBlock:
+          type: number
+    Seat:
+      properties:
+        roomId:
+          type: string
+        seatTypeId:
+          type: string
+    SeatType:
+      properties:
+        name:
+          type: string
+        extraPrice:
+          type: number
+    Slider:
+      properties:
+        content:
+          type: string
+        images:
+          type: arrays
+        title:
+          type: string
+        url:
+          type: string
+    Ticket:
+      properties:
+        date:
+          type: string
+          format: date
+        totalPrice:
+          type: number
+        showTimeId:
+          type: string
+        ticketPriceId:
+          type: string
+        userId:
+          type: string
+    TicketDetail:
+      properties:
+        ticketId:
+          type: string
+        quantity:
+          type: number
+    TicketPrice:
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+    Voucher:
+      properties:
+        code:
+          type: string
+        quantity:
+          type: number
+        condition:
+          type: number
+        conditionNumber:
+          type: number
+        timeStart:
+          type: string
+          format: date
+        timeEnd:
+          type: string
+          format: date
+        content:
+          type: string
+        thumbnail:
+          type: string
+        imagesFile:
+          type: arrays
+    WebConfig:
+      properties:
+        logo:
+          type: string
+        address:
+          type: arrays
+        social:
+          type: arrays
+        phone:
+          type: arrays
+        copyright:
+          type: string
+        webUrl:
+          type: string
+    Comment:
+      properties:
+        user:
+          type: string
+        movie:
+          type: string
+        content:
+          type: string
+        rating:
+          type: number
+    FilmFormat:
+      properties:
+        name:
+          type: string
+        extraPrice:
+          type: number
+    Order:
+      properties:
+        userId:
+          type: string
+        orderCode:
+          type: string
+        qrCode:
+          type: string
+        totalPrice:
+          type: number
+        ticketDetailId:
+          type: string
+        foodDetailId:
+          type: string
+    SetByShowTime:
+      properties:
+        seats:
+          type: arrays
+        showTimeId:
+          type: string
+        movieId:
+          type: string
+        roomId:
+          type: string
+    ShowTime:
+      properties:
+        startAt:
+          type: string
+          format: date
+        endAt:
+          type: string
+          format: date
+        movieId:
+          type: string
+        roomId:
+          type: string
+        filmFormatId:
+          type: string
+        date:
+          type: string
+          format: date
+        extraPrice:
+          type: number
+    User:
+      properties:
+        fullname:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        avatar:
+          type: array
+        phone:
+          type: string
+        address:
+          type: string
+        salt:
+          type: string
+        dob:
+          type: string
+          format: date
+      required:
+        - fullname
+        - username
+        - email
+        - password
+        - avatar
+        - phone
+        - address
+        - salt
+        - dob
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
