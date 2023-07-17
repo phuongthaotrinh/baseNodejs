@@ -10,3 +10,4 @@ export const redisOptions = {
 		connectionTimeOut: 5000
 	}
 };
+import { createClient } from 'redis';

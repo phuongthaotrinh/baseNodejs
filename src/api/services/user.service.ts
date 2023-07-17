@@ -6,25 +6,31 @@ import UserModel from '../models/user.model';
 import { UserRoleEnum } from './../../types/user.type';
 
 
-export const createUser = async (payload: Partial<IUser> & Array<Partial<IUser>>) => {
-	if (Array.isArray(payload) && payload.every((user) => user.role === UserRoleEnum.ADMIN)) {
+export const createUser = async (payload: Partial<any> & Array<Partial<any>>) => {
+	if (Array.isArray(payload) && payload.every((user) => user.role === UserRoleEnum.USER)) {
 		const hasExistedUser = await UserModel.exists({ email: { $in: payload.map((user) => user.email) } });
-		if (hasExistedUser) throw createHttpError.Conflict('Admin account already existed!');
+		if (hasExistedUser) throw createHttpError.Conflict('User account already existed!');
 		return await UserModel.insertMany(payload);
 	}
-	// Add a new teacher user
-	if (payload.role === UserRoleEnum.USER) {
-		const existedClient = await UserModel.findOne({
+	// Add a new admin user
+	if (payload.role === UserRoleEnum.ADMIN) {
+		const existedTeacher = await UserModel.findOne({
 			email: payload.email,
-			role: UserRoleEnum.USER
+			role: UserRoleEnum.ADMIN
 		});
-		if (existedClient) {
-			throw createHttpError.BadRequest('Client account already existed!');
+		if (existedTeacher) {
+			throw createHttpError.BadRequest('Admin account already existed!');
 		}
 
 		return await new UserModel(payload).save();
 	}
 };
+
+
+
+
+
+
 
 // Users update them self account's info
 export const updateUserInfo = async (authId: string, payload: Partial<IUser>) => {
@@ -32,3 +38,9 @@ export const updateUserInfo = async (authId: string, payload: Partial<IUser>) =>
 		new: true
 	});
 };
+
+
+
+export const getList = async() => {
+	return await UserModel.find({}).exec()
+}

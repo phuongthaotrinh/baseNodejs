@@ -1,5 +1,4 @@
 import { paramsStringify } from './queryParams';
-import { IUser } from '../types/user.type';
 
 const getVerificationEmailTemplate = ({
 	redirectDomain,
@@ -7,7 +6,7 @@ const getVerificationEmailTemplate = ({
 	token
 }: {
 	redirectDomain: string;
-	user: Pick<IUser, 'displayName' | 'role'>;
+	user: any;
 	token: string;
 }) => {
 	return /* html */ `
@@ -24,7 +23,7 @@ const getVerificationEmailTemplate = ({
 				<hr>
 				<p>
 					<span style="display: block">Trân trọng!</span>
-					<i>Tiểu học Bột Xuyên</i>
+					<i>Cửa hàng thời trang suesue</i>
 				</p>
 			</div>
 					`;

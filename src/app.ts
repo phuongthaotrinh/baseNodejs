@@ -14,7 +14,7 @@ import swaggerUI from 'swagger-ui-express';
 
 // routers
 import path from 'path';
-import rootRouter from './api/routes';
+import rootRouter from "./api/routes/index";
 import AppConfig from './configs/app.config';
 import { HttpStatusCode } from './configs/statusCode.config';
 // resolve path

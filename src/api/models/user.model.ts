@@ -7,34 +7,13 @@ import mongooseAutoPopulate from 'mongoose-autopopulate';
 import { TSoftDeleteUserModel, IUser, IUserDocument, UserGenderEnum, UserRoleEnum } from '../../types/user.type';
 import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
 const AdressSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		require: true
-	},
-	phone: {
-		type: String,
-		require: true
-	},
-	isMain: {
-		type: Boolean,
-		default: false
-	},
-	address: {
-		province: {
-			key: { type: String },
-			value: { type: String },
-			children: { type: String }
-		},
-		district: {
-			key: { type: String },
-			value: { type: String },
-			children: { type: String }
-		},
-		ward: {
-			key: { type: String },
-			value: { type: String },
-			children: { type: String }
-		},
+	name: { type: String },
+	phone: { type: String },
+	isMain: { type: Boolean, default: false },
+	data: {
+		province: { value: { type: String }, text: { type: String } },
+		district: { value: { type: String }, text: { type: String } },
+		ward: { value: { type: String }, text: { type: String } },
 		desc: { type: String }
 	}
 });
@@ -125,6 +104,12 @@ UserSchema.plugin(mongooseLeanVirtuals);
 UserSchema.plugin(mongooseAutoPopulate);
 
 const UserModel = mongoose.model<IUserDocument, TSoftDeleteUserModel>('Users', UserSchema);
-UserModel.createIndexes();
+UserModel.createIndexes()
+  .then(() => {
+    console.log('Indexes created successfully');
+  })
+  .catch((error) => {
+    console.error('Error creating indexes:', error);
+  });
 
 export default UserModel;

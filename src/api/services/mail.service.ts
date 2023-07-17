@@ -14,7 +14,7 @@ export const sendVerificationEmail = async ({
 		{
 			from: {
 				address: process.env.AUTH_EMAIL!,
-				name: 'APP_NAME'
+				name: 'Cửa hàng thời trang suesue'
 			},
 			to: to,
 			subject: subject,

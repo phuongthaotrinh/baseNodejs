@@ -1,13 +1,14 @@
-import express, { Router } from 'express';
+import userRoute from "./user.route";
+import express from "express";
 
-const rootRouters: Array<Router> = [
-	
-];
 
 const router = express.Router();
 
-rootRouters.forEach((route) => {
-	router.use(route);
-});
+const appRouters = [
+	userRoute
+];
+
+
+appRouters.forEach((route) => router.use(route));
 
 export default router;
