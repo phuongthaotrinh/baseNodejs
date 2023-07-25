@@ -44,3 +44,9 @@ export const updateUserInfo = async (authId: string, payload: Partial<IUser>) =>
 export const getList = async() => {
 	return await UserModel.find({}).exec()
 }
+
+export const changePassword = async (userId: string, newPassword: string) => {
+	const encryptedNewPassword = hashSync(newPassword, genSaltSync(+process.env.SALT_ROUND!));
+
+	return await UserModel.findOneAndUpdate({ _id: userId }, { password: encryptedNewPassword }, { new: true });
+};
