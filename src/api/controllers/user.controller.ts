@@ -39,7 +39,7 @@ export const createUserAccount = useCatchAsync(async (req: Request, res: Respons
 	if (error) {
 		throw createHttpError.BadRequest(error.message);
 	}
-	const newUser = (await UserService.createUser({ ...req.body, role: UserRoleEnum.ADMIN })) as any;
+	const newUser = (await UserService.createUser({ ...req.body, role: UserRoleEnum.USER })) as any;
 	const token = jwt.sign({ auth: newUser.email }, process.env.ACCESS_TOKEN_SECRET!, {
 		expiresIn: '7d'
 	});

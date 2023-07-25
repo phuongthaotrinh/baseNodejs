@@ -7,10 +7,11 @@ export enum UserGenderEnum {
 }
 
 
+
+
 export enum UserRoleEnum {
-	USER = 'User',
-	ADMIN = 'Admin',
-	TEACHER = "TEACHER"
+    USER = 'User',
+    ADMIN = 'Admin'
 }
 
 export interface IAddress extends Document {
